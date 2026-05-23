@@ -1,0 +1,102 @@
+// src/pages/Interview/Interview.jsx
+import './Interview.css';
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import QuestionCard from '../../components/interview/QuestionCard/QuestionCard';
+import { useApi } from '../../hooks/useApi';
+
+const Interview = () => {
+  const { id: attemptId } = useParams();
+  const navigate = useNavigate();
+  const { getNextQuestion, validateAnswer } = useApi();
+  
+  const [currentQuestion, setCurrentQuestion] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [totalQuestions, setTotalQuestions] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [feedback, setFeedback] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadQuestion();
+  }, []);
+
+  const loadQuestion = async () => {
+    try {
+      setLoading(true);
+      const question = await getNextQuestion(attemptId);
+      setCurrentQuestion(question);
+      setSelectedAnswer(null);
+      setFeedback(null);
+    } catch (error) {
+      console.error('Error loading question:', error);
+      if (error.status === 404) {
+        // No more questions, go to results
+        navigate(`/results/${attemptId}`);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const result = await validateAnswer(attemptId, {
+        questionId: currentQuestion.id,
+        ...selectedAnswer
+      });
+      
+      setFeedback(result);
+      
+      if (!result.nextQuestionAvailable) {
+        setTimeout(() => {
+          navigate(`/results/${attemptId}`);
+        }, 2000);
+      }
+    } catch (error) {
+      console.error('Error validating answer:', error);
+    }
+  };
+
+  const handleNextQuestion = () => {
+    setCurrentIndex(prev => prev + 1);
+    loadQuestion();
+  };
+
+  if (loading) {
+    return (
+      <div className="interview-loading">
+        <div className="loading-spinner"></div>
+        <p>Загрузка вопроса...</p>
+      </div>
+    );
+  }
+
+  if (!currentQuestion) {
+    return (
+      <div className="interview-error">
+        <p>Вопрос не найден</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="interview-page">
+      <div className="interview-container">
+        <QuestionCard
+          question={currentQuestion}
+          currentIndex={currentIndex}
+          totalQuestions={totalQuestions || 5}
+          selectedAnswer={selectedAnswer}
+          onAnswerChange={setSelectedAnswer}
+          onSubmit={handleSubmit}
+          isAnswered={!!feedback}
+          feedback={feedback}
+          onNext={feedback?.nextQuestionAvailable ? handleNextQuestion : null}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default Interview;

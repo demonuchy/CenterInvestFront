@@ -2,14 +2,17 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import './App.css';
 
-import { AuthProvider } from './hooks/useAuthContext';
-import MainLayout from './layouts/MailnLayout';
+import { AuthProvider } from './contexts/useAuthContext';
+import MainLayout from './layouts/main/MainLayout';
 
+
+const Home = lazy(() => import('./pages/Home/Home'));
 
 function App() {
+  return(
   <Router>
       <AuthProvider> 
-        <Suspense fallback={<LoadScreen/>}>
+        <Suspense>
           <Routes>
             <Route element={<MainLayout />}>
               <Route path="/" element={<Home />} />
@@ -17,7 +20,7 @@ function App() {
           </Routes>
         </Suspense>
       </AuthProvider>
-    </Router>
+    </Router>)
   
 }
 

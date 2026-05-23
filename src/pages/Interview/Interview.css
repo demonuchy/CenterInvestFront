@@ -1,0 +1,42 @@
+/* src/pages/Interview/Interview.css */
+.interview-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea10 0%, #764ba210 100%);
+    padding: 40px 20px;
+  }
+  
+  .interview-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .interview-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    gap: 16px;
+  }
+  
+  .loading-spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid #e2e8f0;
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  .interview-error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    color: #718096;
+    font-size: 18px;
+  }

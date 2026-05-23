@@ -1,0 +1,50 @@
+/* src/pages/Results/Results.css */
+.results-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea10 0%, #764ba210 100%);
+    padding: 40px 20px;
+  }
+  
+  .results-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .results-title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 800;
+    color: #2d3748;
+    margin: 0 0 40px 0;
+  }
+  
+  .results-container > * + * {
+    margin-top: 24px;
+  }
+  
+  .results-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 32px;
+  }
+  
+  .results-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    gap: 16px;
+  }
+  
+  .results-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    gap: 24px;
+    color: #718096;
+    font-size: 18px;
+  }

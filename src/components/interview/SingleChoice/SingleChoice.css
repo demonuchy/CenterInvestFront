@@ -1,0 +1,74 @@
+/* src/components/interview/SingleChoice/SingleChoice.css */
+.single-choice {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .choice-option {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .choice-option:hover:not(.disabled) {
+    border-color: #667eea;
+    background: #f7fafc;
+    transform: translateX(4px);
+  }
+  
+  .choice-option.selected {
+    border-color: #667eea;
+    background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+  }
+  
+  .choice-option.disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+  
+  .choice-option input[type="radio"] {
+    display: none;
+  }
+  
+  .radio-indicator {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #cbd5e0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+  }
+  
+  .choice-option.selected .radio-indicator {
+    border-color: #667eea;
+    background: #667eea;
+  }
+  
+  .radio-dot {
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.3s ease;
+  }
+  
+  .choice-option.selected .radio-dot {
+    transform: scale(1);
+  }
+  
+  .option-text {
+    font-size: 16px;
+    color: #4a5568;
+    line-height: 1.4;
+  }

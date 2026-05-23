@@ -1,0 +1,82 @@
+/* src/components/results/WeakTopics/WeakTopics.css */
+.weak-topics {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  }
+  
+  .no-weak-topics {
+    text-align: center;
+    padding: 40px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  }
+  
+  .perfect-icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 16px;
+  }
+  
+  .topics-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2d3748;
+    margin: 0 0 20px 0;
+  }
+  
+  .topics-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .topic-item {
+    padding: 16px;
+    background: #f7fafc;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+  }
+  
+  .topic-item:hover {
+    background: #edf2f7;
+    transform: translateX(4px);
+  }
+  
+  .topic-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  .topic-name {
+    font-weight: 600;
+    color: #2d3748;
+    font-size: 16px;
+  }
+  
+  .topic-errors {
+    font-size: 14px;
+    padding: 4px 12px;
+    background: #fed7d7;
+    color: #c53030;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+  
+  .topic-bar {
+    height: 6px;
+    background: #e2e8f0;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  
+  .topic-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #fc8181 0%, #f56565 100%);
+    border-radius: 3px;
+    transition: width 1s ease;
+  }

@@ -17,12 +17,6 @@ const apiClient = async (url, options = {}) => {
         credentials: 'include',
         headers: customHeaders
       });
-      if (response.status === 401) {
-        console.log("⚠️ Получен 401 Unauthorized");
-        const error = new Error('Unauthorized');
-        error.status = 401;
-        throw error;
-      }
       if (response.status === 204) {
         console.log("✅ Получен 204 No Content (успешное удаление)");
         return { success: true, status: 204, data: null };

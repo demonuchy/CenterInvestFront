@@ -1,6 +1,6 @@
 // src/pages/Interview/Interview.jsx
 import './Interview.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import QuestionCard from '../../components/interview/QuestionCard/QuestionCard';
 import  useApi  from '../../hooks/useApi';
@@ -12,18 +12,12 @@ const Interview = () => {
   
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [totalQuestions, setTotalQuestions] = useState(0);
+  const [totalQuestions] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [feedback, setFeedback] = useState(null);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    loadQuestion();
-  }, []);
-
-  const loadQuestion = async () => {
+  const loadQuestion = useCallback(async () => {
     try {
-      setLoading(true);
       const question = await getNextQuestion(attemptId);
       setCurrentQuestion(question);
       setSelectedAnswer(null);
@@ -31,13 +25,16 @@ const Interview = () => {
     } catch (error) {
       console.error('Error loading question:', error);
       if (error.status === 404) {
-        // No more questions, go to results
         navigate(`/results/${attemptId}`);
       }
-    } finally {
-      setLoading(false);
-    }
   };
+  }, [attemptId, getNextQuestion, navigate])
+
+  useEffect(() => {
+    loadQuestion();
+  }, [loadQuestion]);
+
+  
 
   const handleSubmit = async () => {
     try {

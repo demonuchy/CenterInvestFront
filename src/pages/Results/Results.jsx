@@ -1,6 +1,6 @@
 // src/pages/Results/Results.jsx
 import './Results.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ScoreCard from '../../components/results/ScoreCard/ScoreCard';
 import WeakTopics from '../../components/results/WeakTopics/WeakTopics';
@@ -13,22 +13,21 @@ const Results = () => {
   const { getAttemptResult } = useApi();
   
   const [result, setResult] = useState(null);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    loadResult();
-  }, []);
-
-  const loadResult = async () => {
+  const loadResult = useCallback(async () => {
     try {
       const data = await getAttemptResult(attemptId);
       setResult(data);
     } catch (error) {
       console.error('Error loading results:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    } 
+  }, [attemptId, getAttemptResult])
+
+  useEffect(() => {
+    loadResult();
+  }, [loadResult]);
+
+  
 
   const handleRetry = () => {
     navigate('/');

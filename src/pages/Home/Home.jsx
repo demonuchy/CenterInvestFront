@@ -3,7 +3,7 @@ import './Home.css';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/common/Button/Button';
 import  useApi  from '../../hooks/useApi';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 
 const Home = () => {
@@ -11,11 +11,7 @@ const Home = () => {
   const { getAllProfessions, startAttempt } = useApi();
   const [professions, setProfessions] = useState([]);
 
-  useEffect(() => {
-    loadProfessions();
-  }, []);
-
-  const loadProfessions = async () => {
+  const loadProfessions = useCallback(async () => {
     try {
       console.log("Start load data")
       const data = await getAllProfessions();
@@ -25,16 +21,22 @@ const Home = () => {
     } finally {
       console.log("Finish load data")
     }
-    };
+    }, [getAllProfessions])
 
-  const handleStartInterview = async (professionId) => {
-    try {
-      const attemptId = await startAttempt(professionId);
-      navigate(`/interview/${attemptId}`);
-    } catch (error) {
-      console.error('Error starting interview:', error);
-    }
-  };
+  useEffect(() => {
+    loadProfessions();
+  }, [loadProfessions]);
+
+ 
+
+  const handleStartInterview = useCallback(async (professionId) => {
+      try {
+        const attemptId = await startAttempt(professionId);
+        navigate(`/interview/${attemptId}`);
+      } catch (error) {
+        console.error('Error starting interview:', error);
+      }
+    }, [navigate, startAttempt])
 
   return (
     <div className="home-page">

@@ -1,6 +1,5 @@
 // src/components/common/Loader/Loader.jsx
 import './Loader.css';
-import { ThemeProvider } from '../../contexts/ThemeContext';
 
 import React from 'react';
 

@@ -12,13 +12,11 @@ export const AuthProvider = ({ children }) => {
   const {getMe} = useApi();
   const [user, setUser] = useState(null)
   useEffect(() => {
-    // Объявляем асинхронную функцию внутри useEffect
     const fetchUserData = async () => {
       try {
         console.log('Init user');
         const data = await getMe();
         setUser(data);
-        console.log('User:',user);
       } catch (err) {
         console.error('Error init user:', err);
       };

@@ -1,6 +1,5 @@
 // src/layouts/main/MainLayout.jsx
 import { Outlet } from 'react-router-dom';
-import { ThemeProvider } from '../../contexts/ThemeContext';
 import ThemeToggle from '../../components/common/ThemeToggle/ThemeToggle';
 import './MainLayout.css';
 

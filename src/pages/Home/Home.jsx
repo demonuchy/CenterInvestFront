@@ -5,11 +5,11 @@ import Button from '../../components/common/Button/Button';
 import  useApi  from '../../hooks/useApi';
 import { useState, useEffect } from 'react';
 
+
 const Home = () => {
   const navigate = useNavigate();
   const { getAllProfessions, startAttempt } = useApi();
   const [professions, setProfessions] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     loadProfessions();
@@ -17,14 +17,15 @@ const Home = () => {
 
   const loadProfessions = async () => {
     try {
+      console.log("Start load data")
       const data = await getAllProfessions();
       setProfessions(data);
     } catch (error) {
       console.error('Error loading professions:', error);
     } finally {
-      setLoading(false);
+      console.log("Finish load data")
     }
-  };
+    };
 
   const handleStartInterview = async (professionId) => {
     try {
@@ -35,18 +36,9 @@ const Home = () => {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="home-loading">
-        <div className="loading-spinner"></div>
-        <p>Загрузка профессий...</p>
-      </div>
-    );
-  }
-
   return (
     <div className="home-page">
-      <div className="home-hero">
+      <div className="home-wrapper">
         <div className="hero-content">
           <h1 className="hero-title">
             Interview <span className="gradient-text">Flow</span>

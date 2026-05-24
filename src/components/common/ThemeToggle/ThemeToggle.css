@@ -8,11 +8,9 @@
     transition: all var(--transition-base);
   }
   
-  .theme-toggle:hover {
-    background: var(--bg-tertiary);
-  }
-  
   .theme-toggle-track {
+    display: flex;
+    align-items: center;
     width: 48px;
     height: 24px;
     background: var(--bg-tertiary);
@@ -24,6 +22,7 @@
   }
   
   .theme-toggle-thumb {
+    position: absolute;
     width: 20px;
     height: 20px;
     background: var(--primary-gradient);
@@ -36,7 +35,7 @@
   }
   
   [data-theme="dark"] .theme-toggle-thumb {
-    transform: translateX(24px);
+    transform: translateX(22px);
   }
   
   .theme-icon {
@@ -50,5 +49,5 @@
   }
   
   [data-theme="dark"] .theme-toggle:hover .theme-toggle-thumb {
-    transform: translateX(24px) scale(1.1);
+    transform: translateX(22px) scale(1.1);
   }

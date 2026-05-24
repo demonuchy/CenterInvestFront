@@ -91,12 +91,6 @@ const QuestionCard = ({
           </Button>
         </div>
       )}
-
-      {feedback && (
-        <div className="feedback-container">
-          <Feedback feedback={feedback} />
-        </div>
-      )}
     </div>
   );
 };

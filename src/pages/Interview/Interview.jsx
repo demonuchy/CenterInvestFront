@@ -3,7 +3,7 @@ import './Interview.css';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import QuestionCard from '../../components/interview/QuestionCard/QuestionCard';
-import { useApi } from '../../hooks/useApi';
+import  useApi  from '../../hooks/useApi';
 
 const Interview = () => {
   const { id: attemptId } = useParams();
@@ -62,15 +62,6 @@ const Interview = () => {
     setCurrentIndex(prev => prev + 1);
     loadQuestion();
   };
-
-  if (loading) {
-    return (
-      <div className="interview-loading">
-        <div className="loading-spinner"></div>
-        <p>Загрузка вопроса...</p>
-      </div>
-    );
-  }
 
   if (!currentQuestion) {
     return (

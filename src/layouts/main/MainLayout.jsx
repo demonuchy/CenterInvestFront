@@ -6,7 +6,6 @@ import './MainLayout.css';
 
 function MainLayout() {
   return (
-    <ThemeProvider>
       <div className="layout">
         <header className="layout-header">
           <div className="header-content">
@@ -20,7 +19,6 @@ function MainLayout() {
           <Outlet />
         </main>
       </div>
-    </ThemeProvider>
   );
 }
 

@@ -1,9 +1,8 @@
 
-const API_BASE_URL = 'http://localhost:8080/api/';
+const API_BASE_URL = 'http://109.120.150.57:8080/api';
 
 
-const apiClient = async (url, options = {}, version = "v1") => {
-    console.log("2. Формируем заголовки");
+const apiClient = async (url, options = {}) => {
     const headers = {
       ...options.headers
     };
@@ -11,9 +10,11 @@ const apiClient = async (url, options = {}, version = "v1") => {
       headers['Content-Type'] = 'application/json';
     }
 
+    console.log('Url :', url, 'Options :', options)
     const makeRequest = async (customHeaders = headers) => {
-      const response = await fetch(`${API_BASE_URL}${version}${url}`, {
+      const response = await fetch(`${API_BASE_URL}${url}`, {
         ...options,
+        credentials: 'include',
         headers: customHeaders
       });
       if (response.status === 401) {
@@ -38,6 +39,7 @@ const apiClient = async (url, options = {}, version = "v1") => {
         throw error;
       }
       const data = await response.json();
+      console.log('Responce obj :', data)
       return data;
     }
 

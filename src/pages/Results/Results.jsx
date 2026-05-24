@@ -5,7 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import ScoreCard from '../../components/results/ScoreCard/ScoreCard';
 import WeakTopics from '../../components/results/WeakTopics/WeakTopics';
 import Button from '../../components/common/Button/Button';
-import { useApi } from '../../hooks/useApi';
+import useApi  from '../../hooks/useApi';
 
 const Results = () => {
   const { id: attemptId } = useParams();
@@ -33,15 +33,6 @@ const Results = () => {
   const handleRetry = () => {
     navigate('/');
   };
-
-  if (loading) {
-    return (
-      <div className="results-loading">
-        <div className="loading-spinner"></div>
-        <p>Загрузка результатов...</p>
-      </div>
-    );
-  }
 
   if (!result) {
     return (

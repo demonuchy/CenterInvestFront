@@ -1,0 +1,72 @@
+
+
+/* src/components/auth/InputField/InputField.css */
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .input-label {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-left: 4px;
+  }
+  
+  .input-container {
+    position: relative;
+  }
+  
+  .input-container input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-base);
+    color: var(--text-primary);
+    background: var(--input-bg);
+    transition: all var(--transition-base);
+    font-family: var(--font-family);
+  }
+  
+  .input-container input::placeholder {
+    color: var(--text-muted);
+  }
+  
+  .input-container input:focus {
+    outline: none;
+    border-color: var(--border-focus);
+    box-shadow: var(--input-focus-shadow);
+  }
+  
+  .input-container input.error {
+    border-color: var(--error-border);
+    background: var(--error-bg);
+  }
+  
+  .input-container input.error:focus {
+    box-shadow: 0 0 0 3px rgba(245, 101, 101, 0.1);
+  }
+  
+  .input-error {
+    font-size: var(--font-size-xs);
+    color: var(--error-color);
+    margin-top: 4px;
+    margin-left: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    animation: slideDown var(--transition-base);
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

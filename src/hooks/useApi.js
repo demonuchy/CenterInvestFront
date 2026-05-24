@@ -2,6 +2,33 @@ import { useCallback } from 'react';
 import apiClient from "../api/client";
 
 const useApi = () => {
+  // ============ Auth API        ============
+  const signIn = useCallback(async (username, password) => {
+    return apiClient('/auth/sign-in', {
+      method: 'POST',
+      body: JSON.stringify({ name : username, password : password })
+    });
+  }, []);
+
+  const signUp = useCallback(async (username, password) => {
+    return apiClient('/auth/sign-up', {
+      method: 'POST',
+      body: JSON.stringify({ name : username, password : password })
+    });
+  }, []);
+
+  const signOut = useCallback(async () => {
+    return apiClient('/auth/sign-out', {
+      method: 'POST',
+    });
+  }, []);
+
+  // ============ User API        ============
+  const getMe = useCallback(async () => {
+    return apiClient('/user/me', {
+      method: 'GET',
+    });
+  }, []);
   // ============ Public Flow API ============
   
   const startAttempt = useCallback(async (professionId) => {
@@ -106,6 +133,11 @@ const useApi = () => {
   }, []);
 
   return {
+    // Auth API 
+    signIn,
+    signUp,
+    getMe,
+    signOut,
     // Public Flow API
     startAttempt,
     getNextQuestion,

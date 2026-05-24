@@ -5,6 +5,7 @@
     flex-direction: column;
     background: var(--bg-primary);
     transition: background var(--transition-base);
+    user-select: none;
   }
   
   .layout-header {
@@ -19,7 +20,6 @@
   }
   
   .header-content {
-    max-width: 1200px;
     margin: 0 auto;
     padding: 16px 24px;
     display: flex;

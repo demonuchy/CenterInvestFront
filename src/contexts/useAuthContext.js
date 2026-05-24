@@ -1,5 +1,5 @@
-import React, {createContext, useContext} from 'react';
-
+import React, {createContext, useContext, useEffect, useState} from 'react';
+import useApi from '../hooks/useApi';
 const AuthContext = createContext(null);
 
 export const useAuth = () => {
@@ -9,7 +9,24 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const value = {user : null}
+  const {getMe} = useApi();
+  const [user, setUser] = useState(null)
+  useEffect(() => {
+    // Объявляем асинхронную функцию внутри useEffect
+    const fetchUserData = async () => {
+      try {
+        console.log('Init user');
+        const data = await getMe();
+        setUser(data);
+        console.log('User:',user);
+      } catch (err) {
+        console.error('Error init user:', err);
+      };
+    }
+    fetchUserData();
+  }, [getMe, setUser]);
+
+  const value = {user : user}
   return (
     <AuthContext.Provider value={value}>
       {children}
